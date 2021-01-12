@@ -1,12 +1,13 @@
 const Navbar = () => {
     return ( 
-        <nav className="navbar">
-            <h1>The react Blog</h1>
+        <div className="navbar">
+            <h1>Aldy Blog</h1>
             <div className="links">
                 <a href="/">Home</a>
-                <a href="/create">New Blog</a>
+                <a href="/create">Blog</a>
             </div>
-        </nav>
+           
+        </div>
      );
 }
  
