@@ -1,11 +1,13 @@
-import Navbar from "./Navbar";
+
 import Home from "./Home";
+import Navbar from "./Navbar";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Create from "./Create";
 
 function App() {
 
-  
+
+  const title = "Welcome to React!"
   
   return (
     <Router>
@@ -16,6 +18,7 @@ function App() {
             <Route exact path="/">
               <Home/>
             </Route>
+
             <Route path="/create">
               <Create/>
             </Route>
@@ -23,7 +26,6 @@ function App() {
         </div>
       </div>
     </Router>
-    
   );
 }
 

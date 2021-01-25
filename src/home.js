@@ -1,16 +1,36 @@
-import {useState, useEffect} from 'react'
-import BlogList from './BlogList'
-import useFetch from './useFetch';
+import { useState, useEffect } from "react"
+import BlogLists from "./BlogLists"
 
 const Home = () => {
-    const {data:blogs, error} = useFetch('http://localhost:8000/blogs')
-   
+
+    const [blogs, setBlogs] = useState(null
+    )
+    // const [number, setNumber]= useState(0)
+
+    const handleDelete = (id)=>{
+        const newBlog = blogs.filter(blog=> blog.id !== id)
+        setBlogs(newBlog)
+    }
+
+    useEffect(()=>{
+        const abortCont = new AbortController()
+        fetch("http://localhost:8000/blogs",{signal: abortCont.signal})
+        .then(res=>{
+            return res.json()
+        })
+        .then((data)=>{
+            setBlogs(data)
+        })
+        return ()=> abortCont.abort()
+    },[])
+  
     return ( 
         <div className="home">
-            {/* <h2>Blogs</h2> */}
-            {error && <div>{error}</div>}
-            { blogs && <BlogList blogs={blogs} title={"New Blog"}/>}
-            {/* <BlogList blogs={blogs.filter((blog)=> blog.author ==="aldy")} title={"Adly's Blogs"}/> */}
+         {blogs && <BlogLists blogs={blogs} title="All blogs" handleDelete={handleDelete}/>}
+         {/* <BlogLists blogs={blogs.filter((blog)=> blog.author === "aldy")} title="Aldy's blogs" /> */}
+         {/* <p>{number}</p> */}
+         {/* <button onClick={()=>setNumber(number + 1)}>Increment</button> */}
+         
         </div>
      );
 }
